@@ -28,17 +28,17 @@ Route.resource('/users', 'UserController')
 //Ruta POST nuevo producto
 Route.post('/nuevoproducto','ProductController.NuevoProducto');
 //Ruta PUT producto actualizado
-//Route.post('/actualizarproducto','ProductCrontroller.ActualizarProducto');
+Route.put('/actualizarproducto/:id','ProductController.ActualizarProducto');
 //Ruta Delete eliminar producto
-//Route.post('/eliminarproducto','ProductCrontroller.EliminarProducto');
+Route.delete('/eliminarproducto/:id','ProductController.EliminarProducto');
 //Ruta GET Listar Productos
 Route.get('/productos','ProductController.ListasProducto');
 //CRUD Usuarios
 //Ruta POST nuevo usuario
 Route.post('/nuevousuario','UsuarioController.NuevoUsuario');
 //Ruta PUT actualizar usuario
-//Route.post('/actualizarusuario','UsuarioCrontroller.ActualizarUsuario');
+Route.put('/actualizarusuario/:id','UsuarioController.ActualizarUsuario');
 //Ruta Delete eliminar usuario
-//Route.post('/eliminarusuario','UsuarioCrontroller.EliminarUsuario');
+Route.delete('/eliminarusuario/:id','UsuarioController.EliminarUsuario');
 //Ruta GET Listar usuarios
 Route.get('/usuarios','UsuarioController.ListasUsuario');
