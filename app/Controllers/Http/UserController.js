@@ -3,7 +3,7 @@ const User = use('App/Models/User')
 class UserController {
     async store({request, response}){
         //Obtener datos que llegaran del cliente (Insomnia)
-       const userData = request.only(['Nombre','email','password'])
+       const userData = request.only(['Nombre','Rol','email','password'])
         //Crear Nuevo Usuario
         const user = await User.create(userData)
         //Retorna en caso de que el usuario sea creado satisfactoriamente

@@ -42,3 +42,6 @@ Route.put('/actualizarusuario/:id','UsuarioController.ActualizarUsuario');
 Route.delete('/eliminarusuario/:id','UsuarioController.EliminarUsuario');
 //Ruta GET Listar usuarios
 Route.get('/usuarios','UsuarioController.ListasUsuario');
+//Código de auth para segundo y tercer usuario
+//Verificar Código 
+//Route.post('/Verificar/:id','CodeController.VerificarCodigo');
