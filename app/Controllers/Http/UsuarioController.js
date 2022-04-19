@@ -18,6 +18,26 @@ class UsuarioController {
             datos:Personas
         })
     }
+    //Función para actualizar usuario
+    async ActualizarUsuario ({request, response, params})
+    {
+        const users=await Persona.find(params.id)
+        users.merge(request.post())
+        await users.save()
+        response.json({
+            "Se han actualizado los datos correctamente":users
+        })
+    }
+    //Función para eliminar usuario
+    async EliminarUsuario ({response, params})
+    {
+    const { id } = params
+    const users = await Persona.find(id)
+    await users.delete()
+    return response.json({
+        Usuario: "Eliminado con exito"
+    })
+    }
 }
 
 module.exports = UsuarioController
