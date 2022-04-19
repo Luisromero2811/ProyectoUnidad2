@@ -19,26 +19,26 @@ const Route = use('Route')
 //Ruta para inicio de sesión
 Route.post('/login','AuthController.login');
 //Ruta para registro de usuario
-Route.resource('users', 'UserController')
+Route.resource('/users', 'UserController')
   .apiOnly()
   .validator(new Map([
     [['users.store'],['RegistroUser']]
   ]))
 //CRUD Productos
 //Ruta POST nuevo producto
-Route.post('/nuevoproducto','ProductCrontroller.NuevoProducto');
+Route.post('/nuevoproducto','ProductController.NuevoProducto');
 //Ruta PUT producto actualizado
 //Route.post('/actualizarproducto','ProductCrontroller.ActualizarProducto');
 //Ruta Delete eliminar producto
 //Route.post('/eliminarproducto','ProductCrontroller.EliminarProducto');
 //Ruta GET Listar Productos
-Route.get('/productos','ProductCrontroller.ListasProducto');
+Route.get('/productos','ProductController.ListasProducto');
 //CRUD Usuarios
 //Ruta POST nuevo usuario
-Route.post('/nuevousuario','UsuarioCrontroller.NuevoUsuario');
+Route.post('/nuevousuario','UsuarioController.NuevoUsuario');
 //Ruta PUT actualizar usuario
 //Route.post('/actualizarusuario','UsuarioCrontroller.ActualizarUsuario');
 //Ruta Delete eliminar usuario
 //Route.post('/eliminarusuario','UsuarioCrontroller.EliminarUsuario');
 //Ruta GET Listar usuarios
-Route.get('/usuarios','UsuarioCrontroller.ListasUsuario');
+Route.get('/usuarios','UsuarioController.ListasUsuario');

@@ -5,7 +5,8 @@ class AuthController {
         //Campos requeridos                     //Atrapar los datos
         const {email, password} = request.only(['email','password'])
         //Generar token de usuario
-        const token = await auth.attempt(email, password)
+        const usert = await User.findBy('email', email)
+        const token = await auth.generate(usert)
         const user = await User.findBy('email', email)
         return response.json({
             token: token.token,
