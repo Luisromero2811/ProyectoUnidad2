@@ -25,6 +25,10 @@ Route.resource('/users', 'UserController')
     [['users.store'],['RegistroUser']]
   ]))
 //CRUD Productos
+Route.group(()=>{
+  Route.post('/producto','ProductController.NuevoProducto')
+  Route.post('/usuario','UsuarioController.NuevoUsuario')
+}).prefix('/nuevo')
 //Ruta POST nuevo producto
 Route.post('/nuevoproducto','ProductController.NuevoProducto');
 //Ruta PUT producto actualizado
@@ -44,4 +48,10 @@ Route.delete('/eliminarusuario/:id','UsuarioController.EliminarUsuario');
 Route.get('/usuarios','UsuarioController.ListasUsuario');
 //Código de auth para segundo y tercer usuario
 //Verificar Código 
-//Route.post('/Verificar/:id','CodeController.VerificarCodigo');
+Route.post('/verificar/:id','CodeController.VerificarCodigo');
+Route.get('/ip','UserController.GetIp');
+
+Route.get('/list/users','UserController.ListasUsuario');
+Route.get('/user/:id','UserController.getUser');
+Route.post('/send','AuthController.sendmail');
+Route.get('/get/level/:id','AuthController.getRol');
