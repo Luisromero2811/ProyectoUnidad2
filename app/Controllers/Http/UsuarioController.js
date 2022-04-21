@@ -6,7 +6,7 @@ class UsuarioController {
             const userData = request.only(['Nombre', 'Apellido', 'Edad'])    
             const users = await Persona.create(userData)
         return response.json({
-            "Se ha agregado un nuevo usuario con sus datos:" : users
+            message:"Se ha agregado un nuevo usuario"
         })      
           }
 
@@ -25,7 +25,7 @@ class UsuarioController {
         users.merge(request.post())
         await users.save()
         response.json({
-            "Se han actualizado los datos correctamente":users
+            message:"Se han actualizado los datos correctamente"
         })
     }
     //Función para eliminar usuario
@@ -35,7 +35,7 @@ class UsuarioController {
     const users = await Persona.find(id)
     await users.delete()
     return response.json({
-        Usuario: "Eliminado con exito"
+        message: "Eliminado con exito"
     })
     }
 }
