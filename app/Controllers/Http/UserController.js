@@ -43,6 +43,18 @@ class UserController {
         message: "Eliminado con exito"
     })
     }
+
+    async ActualizarUsuario ({request, response, params})
+    {
+        const users=await Persona.find(params.id)
+        users.merge(request.post())
+        if(await users.save()){
+            response.json({
+                status:true
+            })
+        }
+        
+    }
     
 }
 
