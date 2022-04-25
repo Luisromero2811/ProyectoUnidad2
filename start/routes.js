@@ -55,3 +55,6 @@ Route.get('/list/users','UserController.ListasUsuario');
 Route.get('/user/:id','UserController.getUser');
 Route.post('/send','AuthController.sendmail');
 Route.get('/get/level/:id','AuthController.getRol');
+Route.post('/verify/code','AuthController.codeVerificationSU');
+Route.get('/verify/code/:id','AuthController.createCodeVerificationSU');
+Route.post('/verify','AuthController.codeVerification');
