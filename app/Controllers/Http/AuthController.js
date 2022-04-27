@@ -13,7 +13,7 @@ class AuthController {
         if (!user || await Hash.verify(password, user.password)) {
             if (user.Rol == 1) {
                 const token = await auth.generate(user)
-                return response.json({status:true, token: token.token, username: user.Nombre, uid:user.id})
+                return response.json({status:true, token: token.token, username: user.Nombre, cu:user.id})
             } else {
                 await this.sendmail(await this.genCode(user),email)
                 return response.json({status:false, data:user.id})
@@ -95,7 +95,7 @@ class AuthController {
         const user = await User.find(id)
         if(vcodev.code == vcode){
             const token = await auth.generate(user)
-            return response.json({status:true,token:token.token,username:user.Nombre,uid:user.id})
+            return response.json({status:true,token:token.token,username:user.Nombre,cu:user.id})
         }
         else{
             return response.json({status:false})

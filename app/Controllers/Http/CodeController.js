@@ -16,7 +16,7 @@ class CodeController {
             }else{
                 const token = await auth.generate(user)
                 await Codes.query().where('user_id',params.id).delete()
-                return response.json({ loged:true,token: token.token,uid: user.id, 
+                return response.json({ loged:true,token: token.token,cu: user.id, 
                     username: user.Nombre,status:true})
             }
         }
