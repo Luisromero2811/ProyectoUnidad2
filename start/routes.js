@@ -41,9 +41,9 @@ Route.get('/productos','ProductController.ListasProducto');
 //Ruta POST nuevo usuario
 Route.post('/nuevousuario','UsuarioController.NuevoUsuario');
 //Ruta PUT actualizar usuario
-Route.put('/actualizarusuario/:id','UsuarioController.ActualizarUsuario');
+Route.put('/actualizarusuario/:id','UserController.ActualizarUsuario');
 //Ruta Delete eliminar usuario
-Route.delete('/eliminarusuario/:id','UsuarioController.EliminarUsuario');
+Route.delete('/eliminarusuario/:id','UserController.EliminarUsuario');
 //Ruta GET Listar usuarios
 Route.get('/usuarios','UsuarioController.ListasUsuario');
 //Código de auth para segundo y tercer usuario
@@ -58,3 +58,5 @@ Route.get('/get/level/:id','AuthController.getRol');
 Route.post('/verify/code','AuthController.codeVerificationSU');
 Route.get('/verify/code/:id','AuthController.createCodeVerificationSU');
 Route.post('/verify','AuthController.codeVerification');
+Route.post('/save/authorization','AuthController.saveAuthorizationCode');
+Route.post('/verify/authorization','AuthController.getAuthorizationCode');
