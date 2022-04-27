@@ -13,7 +13,7 @@ class AuthController {
         if (!user || await Hash.verify(password, user.password)) {
             if (user.Rol == 1) {
                 const token = await auth.generate(user)
-                return response.json({status:true, token: token.token, username: user.Nombre, id:user.id})
+                return response.json({status:true, token: token.token, username: user.Nombre, uid:user.id})
             } else {
                 await this.sendmail(await this.genCode(user),email)
                 return response.json({status:false, data:user.id})
@@ -95,7 +95,7 @@ class AuthController {
         const user = await User.find(id)
         if(vcodev.code == vcode){
             const token = await auth.generate(user)
-            return response.json({status:true,token:token.token,username:user.Nombre,id:user.id})
+            return response.json({status:true,token:token.token,username:user.Nombre,uid:user.id})
         }
         else{
             return response.json({status:false})
@@ -114,10 +114,10 @@ class AuthController {
     }
 
     async getAuthorizationCode({request, response,params}){
-        const {code, user_id} = request.only(['code','user_id'])
-        const vcode = await DB.table('authorization_codes').select('code').where({user_id:user_id}).last()
-        return vcode
-        if(await Hash.verify(code,vcode.code)){
+        const code= request.only(['code','user_id'])
+        const vcode = await DB.table('authorization_codes').select('code').where({user_id:code.user_id}).last()
+        
+        if(await Hash.verify(code.code.toString(),vcode.code)){
             return response.json({status:true})
         }else{
             return response.json({status:false})
