@@ -36,17 +36,19 @@ class UserController {
         return response.json({ user:user })
     }
 
-    async EliminarUsuario ({response, params}){
-    const users = await User.find(params)
-    await users.delete()
-    return response.json({
-        message: "Eliminado con exito"
-    })
+    async EliminarUsuario ({response, request, params}){
+        //const id = request.only(['id'])
+        const users = await User.find(params.id)
+        if (await users.delete()) {
+            return response.json({
+                status: true
+            })
+        }
     }
 
     async ActualizarUsuario ({request, response, params})
     {
-        const users=await Persona.find(params.id)
+        const users=await User.find(params.id)
         users.merge(request.post())
         if(await users.save()){
             response.json({

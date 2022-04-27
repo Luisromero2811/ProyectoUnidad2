@@ -19,9 +19,13 @@ class UsuarioController {
         })
     }
     //Función para actualizar usuario
-    async ActualizarUsuario ({request, response, params})
-    {
-        const users=await Persona.find(params.id)
+    async ActualizarUsuario ({request, response})
+    {   
+        const id = request.only('id')
+        const users=await Persona.find(id)
+        users.Nombre=request.only('Nombre')
+        users.email=request.only('email')
+        users.Rol = request.only('Rol')
         users.merge(request.post())
         await users.save()
         response.json({
