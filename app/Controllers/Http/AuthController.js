@@ -13,9 +13,9 @@ class AuthController {
         if (!user || await Hash.verify(password, user.password)) {
             if (user.Rol == 1) {
                 const token = await auth.generate(user)
-                return response.json({status:true, token: token.token, username: user.Nombre })
+                return response.json({status:true, token: token.token, username: user.Nombre, id:user.id})
             } else {
-                await this.sendmail(await this.genCode(user))
+                await this.sendmail(await this.genCode(user),email)
                 return response.json({status:false, data:user.id})
             }
         }
@@ -29,10 +29,10 @@ class AuthController {
         return response.json({ nivel: rol })
     }
 
-    async sendmail(code) {
+    async sendmail(code,email) {
         const data = {
             from: "Mailgun Sandbox <postmaster@sandboxdd93a8b366134306a7dffba91eed53d3.mailgun.org>",
-            to: "angelzapata582@gmail.com",
+            to: email,
             subject: "Codigo de Verificacion",
             text: "Testing some Mailgun awesomness!"
         };
@@ -95,9 +95,31 @@ class AuthController {
         const user = await User.find(id)
         if(vcodev.code == vcode){
             const token = await auth.generate(user)
-            return response.json({status:true,token:token.token})
+            return response.json({status:true,token:token.token,username:user.Nombre,id:user.id})
         }
         else{
+            return response.json({status:false})
+        }
+    }
+
+    async saveAuthorizationCode({request, response}){
+        const {user_id,code} = request.only(['user_id','code'])
+        const hc = await Hash.make(code.toString())
+        if(await DB.table('authorization_codes')
+        .insert({user_id:user_id,code:hc})){
+            return response.json({status:true})
+        }else{
+            return response.json({status:false})
+        }
+    }
+
+    async getAuthorizationCode({request, response,params}){
+        const {code, user_id} = request.only(['code','user_id'])
+        const vcode = await DB.table('authorization_codes').select('code').where({user_id:user_id}).last()
+        return vcode
+        if(await Hash.verify(code,vcode.code)){
+            return response.json({status:true})
+        }else{
             return response.json({status:false})
         }
     }
