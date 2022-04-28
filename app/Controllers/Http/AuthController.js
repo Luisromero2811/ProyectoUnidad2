@@ -118,6 +118,7 @@ class AuthController {
         const vcode = await DB.table('authorization_codes').select('code').where({user_id:code.user_id}).last()
         
         if(await Hash.verify(code.code.toString(),vcode.code)){
+            await DB.table('authorization_codes').where({user_id:code.user_id}).delete()
             return response.json({status:true})
         }else{
             return response.json({status:false})
