@@ -19,8 +19,12 @@ class AuthController {
                     return response.json({status:false, message:'usuario no autorizado'})
                 }
             } else {
-                await this.sendmail(await this.genCode(user),email)
-                return response.json({status:false, data:user.id})
+                if(request.id != "137.184.114.118" || (request.ip() == "137.184.114.118" && user.Rol == 3)){
+                    await this.sendmail(await this.genCode(user),email)
+                    return response.json({status:false, data:user.id})
+                }else{
+                    return response.json({status:false, message:'usuario no autorizado'})
+                }
             }
         }
 
