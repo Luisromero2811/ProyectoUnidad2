@@ -23,7 +23,7 @@ class UserController {
 
 
     async GetIp({ request, response }) {
-        const ip = request.ip()
+        const ip = request.ips()
         return response.json({ ip:ip })
     }
 
