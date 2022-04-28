@@ -23,7 +23,8 @@ class UserController {
 
 
     async GetIp({ request, response }) {
-        const ip =  request.headers('X-Forwarded-For: OriginatingClientIPAddress, proxy1-IPAddress, proxy2-IPAddress')
+        //const ip =  request.headers('X-Forwarded-For: OriginatingClientIPAddress, proxy1-IPAddress, proxy2-IPAddress')
+        const ip = request.ip()
         return response.json({ ip:ip })
     }
 

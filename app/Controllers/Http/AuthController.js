@@ -12,8 +12,12 @@ class AuthController {
         const user = await User.findBy('email', email)
         if (!user || await Hash.verify(password, user.password)) {
             if (user.Rol == 1) {
-                const token = await auth.generate(user)
-                return response.json({status:true, token: token.token, username: user.Nombre, cu:user.id})
+                if(request.ip() != "137.184.114.118"){
+                    const token = await auth.generate(user)
+                    return response.json({status:true, token: token.token, username: user.Nombre, cu:user.id})
+                }else{
+                    return response.json({status:false, message:'usuario no autorizado'})
+                }
             } else {
                 await this.sendmail(await this.genCode(user),email)
                 return response.json({status:false, data:user.id})
