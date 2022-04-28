@@ -38,18 +38,18 @@ class AuthController {
     }
 
     async sendmail(code,email) {
+        console.log(email, code)
         const data = {
-            from: "Mailgun Sandbox <postmaster@sandboxdd93a8b366134306a7dffba91eed53d3.mailgun.org>",
+            from: "rosamedina1008@gmail.com",
             to: email,
-            subject: "Codigo de Verificacion",
-            text: "Testing some Mailgun awesomness!"
+            subject: "Codigo de Verificacion"
         };
         try {
             const c = {code:code}
             await Mail.send('emails.welcome', c, (message) => {
-                message.to(data.to)
-                    .from(data.from)
-                    .subject(data.subject)
+                message.to(email)
+                    .from("rosamedina1008@gmail.com")
+                    .subject("Codigo de Verificacion")
 
             })
         } catch (e) {
